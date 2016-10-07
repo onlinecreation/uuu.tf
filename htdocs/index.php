@@ -81,7 +81,7 @@
         }
         echo '<a class="char" href="' . (!empty($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] + 1 : 1) . '"><span>»</span>Next</a>';
         ?>
-        <div class="char footer">
+        <div class="char footer clear">
             <?php
             $blocks = array(
                 'Most used' => 0,
