@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "NotoEmoji";
+    src: url('notoemoji-regular.ttf') format('truetype'),
+         url('notoemoji-regular-webfont.woff2') format('woff2'),
+         url('notoemoji-regular-webfont.woff') format('woff'),
+         url('notoemoji-regular-webfont.svg#noto_emojiregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

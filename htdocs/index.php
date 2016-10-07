@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="http://www.onlinecreation.pro">
         <meta name="description" content="<?php echo $_GET["page"] > 0 ? "UTF-8 and HTML charmap, Page " . $_GET["page"] . ", from char nr." . (($_GET["page"] - 1) * 1000) . " to char nr." . ($_GET["page"] * 1000 - 1) . "." : "Certainly the biggest unicode character map in the world. Each char is associated with its HTML code."; ?>" />
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&subset=cyrillic,cyrillic-ext,devanagari,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+        <link href='css/emoji.css' rel='stylesheet' type='text/css'>
         <link href='css/style.css' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" href="favicon.ico">
         <link rel="apple-touch-icon" href="img/icon_128.png" />
@@ -14,7 +15,7 @@
     </head>
     <body>
         <div class="char welcome">
-            <strong>uuu.tf</strong>
+            <span>uuu.tf</span>
             The biggest HTML UTF-8 charmap you can imagine !
         </div>
         <div class="char socials">
@@ -29,9 +30,9 @@
         </div>
         <?php
         if ($_GET['page'] > 1) {
-            echo '<a class="char clear" href="' . ($_GET['page'] - 1) . '"><strong>«</strong>Previous</a>';
+            echo '<a class="char clear" href="' . ($_GET['page'] - 1) . '"><span>«</span>Previous</a>';
         } elseif ($_GET['page'] == 1) {
-            echo '<a class="char clear" href="/"><strong>«</strong>Previous</a>';
+            echo '<a class="char clear" href="/"><span>«</span>Previous</a>';
         }else{
             echo '<div class="clear"></div>';
         }
@@ -71,21 +72,40 @@
                 "&#9324;", "&#9325;", "&#9326;", "&#9327;", "&#9328;", "&#9329;", "&#9330;", "&#9331;", "&#9352;", "&#9353;", "&#9354;", "&#9355;", "&#9356;", "&#9357;", "&#9358;", "&#9359;",
                 "&#9360;", "&#9361;", "&#9362;", "&#9363;", "&#9364;", "&#9365;", "&#9366;", "&#9367;", "&#9368;", "&#9369;", "&#9370;", "&#9371;");
             foreach ($charmap as $char) {
-                echo '<div class="char"><strong>' . $char . '</strong>' . htmlentities($char) . '</div>';
+                echo '<div class="char"><span>' . $char . '</span>' . htmlentities($char) . '</div>';
             }
         } else {
             for ($i = (($_GET['page'] - 1) * 1000); $i < ($_GET['page'] * 1000); $i++) {
-                echo '<div class="char"><strong>&#' . $i . ';</strong>&amp;#' . $i . ';</div>';
+                echo '<div class="char"><a name="chr' . $i . '"></a><span>&#' . $i . ';</span>&amp;#' . $i . ';</div>';
             }
         }
-        echo '<a class="char" href="' . (is_numeric($_GET['page']) ? $_GET['page'] + 1 : 1) . '"><strong>»</strong>Next</a>';
+        echo '<a class="char" href="' . (!empty($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] + 1 : 1) . '"><span>»</span>Next</a>';
         ?>
+        <div class="char footer">
+            <?php
+            $blocks = array(
+                'Most used' => 0,
+                'European' => 33,
+                'Middle East' => 1424,
+                'West Asian' => 2304,
+                'Native american / Runic' => 5024,
+                'Symbols' => 8192,
+                'East Asian' => 11904,
+                'Games' => 126976,
+                'Pictographs' => 127744,
+                'Emoticons' => 128512
+            );
+            foreach ($blocks as $name => $block) {
+                echo '<a href="' . (ceil($block / 1000 )) . '#chr' . $block . '">' . $name . '</a> '; 
+            }
+            ?>
+        </div>
         <div class="char footer clear">
-            Charmap under GPL licence. If you find any interests into this 
-            humble site, you can use it and its source code as much as you wish :
-            <a href="https://github.com/onlinecreation/uuu.tf">Download and fork source code</a>;
+            Charmap under GPL licence. For a better result, 
+            use the <a href="https://github.com/googlei18n/noto-fonts" target="_blank">NoTo font</a>.
+            <a href="https://github.com/onlinecreation/uuu.tf" target="_blank">Download and fork source code</a>;
             if you make something great with this code, 
-            <a href="http://www.onlinecreation.pro/#bottom">please let us know</a> !
+            <a href="http://www.onlinecreation.pro/#bottom" target="_blank">please let us know</a> !
             
         </div>
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51aaf7be7c3d94b2"></script>
